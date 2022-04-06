@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var iniciarSesion: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_inicio_sesion)
 
         iniciarSesion= findViewById(R.id.button)
         iniciarSesion.setOnClickListener {
