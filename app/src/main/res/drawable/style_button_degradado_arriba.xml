@@ -8,11 +8,10 @@
                 android:top="10sp" />
             <corners android:radius="7dp"/>
             <gradient
-                android:angle="180"
+                android:angle="270"
                 android:startColor="@color/negro_grisaseo"
                 android:endColor="@color/negro_oscuro">
             </gradient>
-
-        </shape>
+        </shape>>
     </item>
 </selector>

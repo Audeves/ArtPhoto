@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArtPhoto">
         <activity
+<<<<<<< HEAD
             android:name=".PublicacionActivity"
+=======
+            android:name=".ActivityPrimerInicio"
+>>>>>>> f2151bd01542a2493ffcd74b0e7487073d7801f4
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

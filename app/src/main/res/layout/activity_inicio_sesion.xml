@@ -9,13 +9,9 @@
 
     <ImageView
         android:id="@+id/iv_barra"
-        android:layout_width="398dp"
-        android:layout_height="128dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/imagen_inicio_de_sesion"
-        tools:layout_editor_absoluteY="-4dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/imagen_inicio_de_sesion"/>
 
     <TextView
         android:id="@+id/tv_inicio_sesion"
@@ -125,6 +121,7 @@
         android:id="@+id/btn_crear_cuenta"
         android:layout_width="125dp"
         android:layout_height="35dp"
+        android:textColor="@color/white"
         android:text="CREAR CUENTA"
         android:backgroundTint="@color/black"
         android:textSize="10sp"
@@ -149,7 +146,7 @@
 
     <Button
         android:id="@+id/img_btn_apple"
-        android:layout_width="100dp"
+        android:layout_width="112dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
@@ -164,7 +161,7 @@
 
     <Button
         android:id="@+id/img_btn_google"
-        android:layout_width="100dp"
+        android:layout_width="112dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
@@ -177,7 +174,7 @@
 
     <Button
         android:id="@+id/img_btn_acebook"
-        android:layout_width="100dp"
+        android:layout_width="112dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
