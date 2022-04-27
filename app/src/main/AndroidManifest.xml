@@ -10,12 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArtPhoto">
         <activity
-
-            android:name=".PublicacionActivity"
-            android:exported="false"/>
+            android:name=".ActivityContact"
+            android:exported="false" />
         <activity
-            android:name=".ActivityPrimerInicio"
-
+            android:name=".ActivityCrearCuenta"
+            android:exported="false" />
+        <activity
+            android:name=".PublicacionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
@@ -23,7 +27,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.ArtPhoto.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityPrimerInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
