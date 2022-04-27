@@ -45,14 +45,11 @@ class AdaptadorPublicacion: BaseAdapter {
         iv_imgPerfil.setImageResource(publi.iconoPerfil)
         iv_img.setImageResource(publi.fotoPublicacion)
        // Toast.makeText(context,"ayuda",Toast.LENGTH_SHORT).show()
-  //      vista.setOnClickListener{
-  //          val intent: Intent = Intent(context,PeliculaActivity::class.java)
- //           intent.putExtra("nombre",publi.nombre)
- //           intent.putExtra("desc",publi.sinopsis)
-  //          intent.putExtra("img",publi.img)
-  //          context.startActivity(intent)
+        vista.setOnClickListener{
+            val intent: Intent = Intent(context,ActivityContact::class.java)
 
-  //      }
+            context.startActivity(intent)
+        }
         return vista
 
     }
