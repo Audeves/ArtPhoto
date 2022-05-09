@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rb_recordar_contraseña" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_olvide_contra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_olvide_contra" />
 
     <Button
         android:id="@+id/btn_crear_cuenta"

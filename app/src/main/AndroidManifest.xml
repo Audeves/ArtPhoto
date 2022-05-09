@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArtPhoto.NoActionBar">
         <activity
+            android:name=".RecuperarContra"
+            android:exported="false" />
+        <activity
             android:name=".ActivityContact"
             android:exported="false" />
         <activity
