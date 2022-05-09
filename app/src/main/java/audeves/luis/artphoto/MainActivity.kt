@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -24,12 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_inicio_sesion)
 
         var btnIniciarSesion = findViewById<Button>(R.id.button)
-
+        var tv_recuperar_contra = findViewById<TextView>(R.id.tv_olvide_contra)
 
         auth = Firebase.auth
-
-        val edt_correo: EditText = findViewById(R.id.edt_correo)
-        val edt_contraseña: EditText = findViewById(R.id.edt_contraseña)
 
 
         btnIniciarSesion.setOnClickListener {
@@ -68,6 +66,11 @@ class MainActivity : AppCompatActivity() {
                 val intent: Intent = Intent(this, ActivityCrearCuenta::class.java)
                 startActivity(intent)
 
+            }
+
+            tv_recuperar_contra.setOnClickListener {
+                val intent: Intent = Intent(this, RecuperarContra::class.java)
+                startActivity(intent)
             }
         }
     }
