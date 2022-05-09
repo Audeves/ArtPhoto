@@ -12,11 +12,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class ActivityPrimerInicio : AppCompatActivity() {
-
+    private val auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_primer_inicio)
+
         var btnInicioSesion = findViewById<Button>(R.id.btn_iniciar_sesion)
         btnInicioSesion.setOnClickListener {
             val intent: Intent = Intent(this, MainActivity::class.java)
@@ -30,6 +31,13 @@ class ActivityPrimerInicio : AppCompatActivity() {
             startActivity(intent)
 
         }
-
+    checkUser()
+    }
+    private fun checkUser(){
+        val currentUser =auth.currentUser
+        if(currentUser !=null){
+            val intent: Intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
