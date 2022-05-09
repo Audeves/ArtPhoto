@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/imagen_de_fondo"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/imagen_pixel_2"/>
 
     <ImageView
         android:id="@+id/iv_logotipo_blanco"
@@ -53,7 +53,7 @@
         android:id="@+id/btn_iniciar_sesion"
         android:layout_width="350dp"
         android:layout_height="40dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/style_button_degradado_arriba"
         android:text="INICIAR SESIÓN"
         android:textColor="@color/white"
@@ -97,7 +97,7 @@
         android:id="@+id/tv_iniciar_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="80dp"
         android:text="INICIAR CON:"
         android:textColor="@color/white"
         android:textSize="13sp"
