@@ -11,7 +11,7 @@
         android:id="@+id/iv_barra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/imagen_inicio_de_sesion"/>
+        app:srcCompat="@drawable/inicio_de_sesion"/>
 
     <TextView
         android:id="@+id/tv_inicio_sesion"
@@ -37,13 +37,13 @@
         app:srcCompat="@drawable/logotipo_negro" />
 
     <EditText
-        android:id="@+id/edt_nombre_usuario"
+        android:id="@+id/edt_correo"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/style_bordes_edittext"
         android:backgroundTint="@color/gris_claro"
-        android:text="Nombre de usuario"
+        android:hint="correo"
         android:textColor="@color/gris_claro2"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,19 +58,19 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/style_bordes_edittext"
         android:backgroundTint="@color/gris_claro"
-        android:text="Contraseña"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
         android:textColor="@color/gris_claro2"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_nombre_usuario" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_correo" />
 
     <RadioButton
         android:id="@+id/rb_recordar_contraseña"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="8dp"
         android:text="Recordar contraseña"
         android:textSize="10sp"
@@ -108,7 +108,7 @@
         android:id="@+id/tv_no_cuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="30dp"
         android:text="No tengo cuenta"
         android:textSize="10sp"
         android:textColor="@color/gris_claro2"
@@ -134,7 +134,7 @@
         android:id="@+id/tv_crear_cuenta_con"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="35dp"
         android:text="CREAR CUENTA CON:"
         android:textColor="@color/black"
         android:textSize="13sp"

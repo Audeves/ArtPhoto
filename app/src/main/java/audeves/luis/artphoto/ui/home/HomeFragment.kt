@@ -1,5 +1,6 @@
 package audeves.luis.artphoto.ui.home
 
+import android.content.ClipData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
     //    homeViewModel.text.observe(viewLifecycleOwner) {
     //        textView.text = it
      //   }
+
+
         llenarPublicaciones()
         var adaptador = AdaptadorPublicacion(root.context,publicaciones)
         var listView: ListView = binding.listviewPubli
