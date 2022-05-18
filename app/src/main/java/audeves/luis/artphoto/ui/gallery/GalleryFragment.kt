@@ -1,11 +1,11 @@
 package audeves.luis.artphoto.ui.gallery
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,16 +14,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.content.contentValuesOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import audeves.luis.artphoto.R
+import audeves.luis.artphoto.Usuarios
 import audeves.luis.artphoto.databinding.FragmentGalleryBinding
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
 
@@ -31,6 +38,10 @@ class GalleryFragment : Fragment() {
     lateinit var ejemplo_icono: ImageView;
     private var _binding: FragmentGalleryBinding? = null
     private var auth = Firebase.auth
+    val database = Firebase.database
+    val myRef = database.getReference("usuarios")
+    val storage = Firebase.storage
+    lateinit var nombreImg :String
     val PERM_IMG = 123
     val PICK_IMG =234
     // This property is only valid between onCreateView and
@@ -48,6 +59,7 @@ class GalleryFragment : Fragment() {
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         ejemplo_icono = binding.imageView3
         ejemplo_icono.setOnClickListener{
             if(context?.let { it1 ->
@@ -66,9 +78,30 @@ class GalleryFragment : Fragment() {
             textView.text = it
         }
         val usuario = auth.currentUser
+
         if (usuario != null){
+            nombreImg = "perfil/"+usuario?.uid.toString()+".jpg"
+            myRef.child(usuario.uid).get().addOnCompleteListener() {
+                @Override
+                fun onComplete(@NonNull usuarios:Usuarios<DataSnapshot>){
+
+            }
+            }
             val textGallery: TextView = root.findViewById(R.id.text_gallery)
             textGallery.setText(usuario.email)
+            val usuarioListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Get Post object and use the values to update the UI
+                    val user = dataSnapshot.getValue<Usuarios<Any?>>()
+                    Toast.makeText(context,user?.telefono,Toast.LENGTH_SHORT).show()
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                 //   Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                    Toast.makeText(context,"exploto",Toast.LENGTH_SHORT).show()
+                }
+            }
+            myRef.addValueEventListener(usuarioListener)
         }
         val textViewGal: TextView = root.findViewById(R.id.textView5)
         textViewGal.setText("")
@@ -110,13 +143,35 @@ class GalleryFragment : Fragment() {
                 val img_stream = context?.contentResolver?.openInputStream(img_uri!!)
                 val img_bitmap = BitmapFactory.decodeStream(img_stream)
                 ejemplo_icono.setImageBitmap(img_bitmap)
+                subirImagen()
             }catch (e: Exception){
                 e.printStackTrace()
                 Toast.makeText(context, "algo fallo", Toast.LENGTH_SHORT).show()
             }
         }
     }
-    
+
+    private fun subirImagen() {
+        val storageRef = storage.reference
+
+        val imageRef = storageRef.child(nombreImg)
+
+        ejemplo_icono.isDrawingCacheEnabled = true
+        ejemplo_icono.buildDrawingCache()
+        val bitmap = (ejemplo_icono.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = imageRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(context,"Problema al subir la imagen",Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener { taskSnapshot ->
+            Toast.makeText(context,"Se subio la imagen",Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -1,13 +1,7 @@
 package audeves.luis.artphoto
 
-import android.app.Activity
-import android.widget.EditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-
-class Usuarios {
+import com.google.firebase.database.IgnoreExtraProperties
 
 
-}
+@IgnoreExtraProperties
+data class Usuarios<T>(val uid:String, var ciudad:String, var correo:String, var esFotografo: Boolean, var estado:String, var imgPerfil:String, var nombre: String, var nombreUsuario:String, var telefono:String)
