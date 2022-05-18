@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -30,6 +31,12 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarHome.toolbar)
 
+        //var extras = intent.extras
+        //if (extras != null){
+        //    var correo: String = extras.getString("correo","")
+        //    val textGallery: TextView = findViewById(R.id.text_gallery)
+        //    textGallery.setText(correo)
+        //}
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -43,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
