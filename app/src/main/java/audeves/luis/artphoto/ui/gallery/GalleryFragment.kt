@@ -81,27 +81,24 @@ class GalleryFragment : Fragment() {
 
         if (usuario != null){
             nombreImg = "perfil/"+usuario?.uid.toString()+".jpg"
-            myRef.child(usuario.uid).get().addOnCompleteListener() {
-                @Override
-                fun onComplete(@NonNull usuarios:Usuarios<DataSnapshot>){
-
-            }
-            }
+            myRef.child(usuario.uid)
             val textGallery: TextView = root.findViewById(R.id.text_gallery)
-            textGallery.setText(usuario.email)
-            val usuarioListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Get Post object and use the values to update the UI
-                    val user = dataSnapshot.getValue<Usuarios<Any?>>()
-                    Toast.makeText(context,user?.telefono,Toast.LENGTH_SHORT).show()
-                }
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Getting Post failed, log a message
-                 //   Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-                    Toast.makeText(context,"exploto",Toast.LENGTH_SHORT).show()
-                }
+
+            myRef.child(usuario.uid).child("nombreUsuario").get().addOnSuccessListener {
+                ///Toast.makeText(context,it.value.toString(),Toast.LENGTH_SHORT).show()
+                textGallery.setText(it.getValue().toString())
+              //  Log.i("firebase", "Got value ${it.value}")
+            }.addOnFailureListener{
+                //Log.e("firebase", "Error getting data", it)
             }
-            myRef.addValueEventListener(usuarioListener)
+            myRef.child(usuario.uid).child("imgPerfil").get().addOnSuccessListener {
+
+               descargarImagen()
+            }.addOnFailureListener{
+                Toast.makeText(context,"rip",Toast.LENGTH_SHORT).show()
+                //Log.e("firebase", "Error getting data", it)
+            }
+          //  myRef.addValueEventListener(usuarioListener)
         }
         val textViewGal: TextView = root.findViewById(R.id.textView5)
         textViewGal.setText("")
@@ -170,6 +167,23 @@ class GalleryFragment : Fragment() {
             Toast.makeText(context,"Se subio la imagen",Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun descargarImagen(){
+        val storageRef = storage.reference
+        val imageref = storageRef.child(nombreImg)
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        imageref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            Toast.makeText(context,"Se consiguio la imagen",Toast.LENGTH_SHORT).show()
+          //  var bitmap:Bitmap =(it as BitmapDrawable).bitmap
+          //  var blop:ByteArrayOutputStream = ByteArrayOutputStream()
+        //    bitmap.compress(Bitmap.CompressFormat.JPEG,100,blop)
+      //      var data = blop.toByteArray()
+         //  ejemplo_icono.setImageBitmap(bitmap)
+        }.addOnFailureListener {
+            Toast.makeText(context,"No se consiguio la imagen",Toast.LENGTH_SHORT).show()
+            // Handle any errors
+        }
     }
 
     override fun onDestroyView() {
