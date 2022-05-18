@@ -1,16 +1,24 @@
 package audeves.luis.artphoto
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.lang.Exception
 
 
 class ActivityCrearCuenta : AppCompatActivity() {
@@ -18,13 +26,31 @@ class ActivityCrearCuenta : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     val database = Firebase.database
     val myRef = database.getReference("usuarios")
+    lateinit var img_btn_subirfoto: ImageView
+    val PERM_IMG = 123
+    val PICK_IMG =234
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_cuenta)
 
         auth = Firebase.auth
 
+        img_btn_subirfoto = findViewById(R.id.img_btn_subirfoto)
+        img_btn_subirfoto.setOnClickListener{
+
+            if(this.let { it1 ->
+                    ContextCompat.checkSelfPermission(
+                        it1,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                } == PackageManager.PERMISSION_GRANTED){
+                //Toast.makeText(context, "ya tiene el permiso", Toast.LENGTH_SHORT).show()
+                seleccionar_Imagen()
+            }else{
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERM_IMG)
+            }
+        }
         val edt_nombre_completo: EditText = findViewById(R.id.edt_nombre)
         val edt_nombre_usuario: EditText = findViewById(R.id.edt_nombre_usuario)
         val edt_correo: EditText = findViewById(R.id.edt_correo)
@@ -74,6 +100,44 @@ class ActivityCrearCuenta : AppCompatActivity() {
                                 Toast.LENGTH_SHORT).show()
                         }
                     }
+            }
+        }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            PERM_IMG -> {
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    seleccionar_Imagen()
+                }else{
+                    Toast.makeText(this, "no acepto permisos", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun seleccionar_Imagen() {
+        val intent_imgs = Intent(Intent.ACTION_PICK)
+        intent_imgs.type = "image/*"
+        startActivityForResult(intent_imgs, PICK_IMG)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == PICK_IMG){
+            try{
+                val img_uri = data?.data
+                val img_stream = this.contentResolver?.openInputStream(img_uri!!)
+                val img_bitmap = BitmapFactory.decodeStream(img_stream)
+                img_btn_subirfoto.setImageBitmap(img_bitmap)
+            }catch (e: Exception){
+                e.printStackTrace()
+                Toast.makeText(this, "algo fallo", Toast.LENGTH_SHORT).show()
             }
         }
     }
