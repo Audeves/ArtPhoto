@@ -3,7 +3,9 @@ package audeves.luis.artphoto
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +17,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 
 
@@ -27,6 +32,7 @@ class ActivityCrearCuenta : AppCompatActivity() {
     val database = Firebase.database
     val myRef = database.getReference("usuarios")
     lateinit var img_btn_subirfoto: ImageView
+    val storage = Firebase.storage
     val PERM_IMG = 123
     val PICK_IMG =234
 
@@ -79,12 +85,13 @@ class ActivityCrearCuenta : AppCompatActivity() {
                 Toast.makeText(this,"favor de llenar los campos", Toast.LENGTH_SHORT).show()
             } else {
 
-                // TODO: registro en firebase
 
                 auth.createUserWithEmailAndPassword(correo, contraseña)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser
+                            var nombreImg :String= "perfil/"+user?.uid.toString()+".jpg"
+
 
                             myRef.child(user?.uid.toString()).child("correo").setValue(correo)
                             myRef.child(user?.uid.toString()).child("nombreUsuario").setValue(usuario)
@@ -92,8 +99,15 @@ class ActivityCrearCuenta : AppCompatActivity() {
                             myRef.child(user?.uid.toString()).child("estado").setValue(estado)
                             myRef.child(user?.uid.toString()).child("ciudad").setValue(ciudad)
                             myRef.child(user?.uid.toString()).child("nombre").setValue(nombre)
-                            startActivity(intent)
+                            var esFotografo = false
+                            myRef.child(user?.uid.toString()).child("esFotografo").setValue(esFotografo)
+
+                            myRef.child((user?.uid.toString())).child("imgPerfil").setValue(nombreImg)
+                            subirImagen(nombreImg)
                             Toast.makeText(baseContext, "Bienvenido $usuario",Toast.LENGTH_SHORT).show()
+                            startActivity(intent)
+
+
                         } else {
                             Log.w("crear cuenta", "createUserWithEmail:failure", task.exception)
                             Toast.makeText(baseContext, "Fallo de autenticacion.",
@@ -103,6 +117,29 @@ class ActivityCrearCuenta : AppCompatActivity() {
             }
         }
     }
+
+    private fun subirImagen(nombreImg:String) {
+        val storageRef = storage.reference
+
+        val imageRef = storageRef.child(nombreImg)
+
+        img_btn_subirfoto.isDrawingCacheEnabled = true
+        img_btn_subirfoto.buildDrawingCache()
+        val bitmap = (img_btn_subirfoto.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val data = baos.toByteArray()
+
+        var uploadTask = imageRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            Toast.makeText(baseContext,"Problema al subir la imagen",Toast.LENGTH_SHORT).show()
+        }.addOnSuccessListener { taskSnapshot ->
+            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            // ...
+        }
+
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -141,4 +178,6 @@ class ActivityCrearCuenta : AppCompatActivity() {
             }
         }
     }
+
+
 }
