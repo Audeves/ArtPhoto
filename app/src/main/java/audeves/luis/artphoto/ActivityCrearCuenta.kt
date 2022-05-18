@@ -9,12 +9,15 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 
 class ActivityCrearCuenta : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    val database = Firebase.database
+    val myRef = database.getReference("usuarios")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +42,14 @@ class ActivityCrearCuenta : AppCompatActivity() {
             var correo: String = edt_correo.text.toString().trim()
             var contraseña: String = edt_contraseña.text.toString().trim()
             var usuario: String = edt_nombre_usuario.text.toString().trim()
+            var telefono: String = edt_numero.text.toString().trim()
+            var estado: String = edt_estado.text.toString().trim()
+            var ciudad: String = edt_ciudad.text.toString().trim()
+            var nombre: String = edt_nombre_completo.text.toString().trim()
 
-            if (correo.isNullOrEmpty() || contraseña.isNullOrEmpty()){
+            if (correo.isNullOrEmpty() || contraseña.isNullOrEmpty() || contraseña.isNullOrEmpty() ||
+                usuario.isNullOrEmpty() || telefono.isNullOrEmpty() || estado.isNullOrEmpty()
+                || ciudad.isNullOrEmpty() || nombre.isNullOrEmpty()){
                 Toast.makeText(this,"favor de llenar los campos", Toast.LENGTH_SHORT).show()
             } else {
 
@@ -50,13 +59,19 @@ class ActivityCrearCuenta : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             val user = auth.currentUser
+
+                            myRef.child(user?.uid.toString()).child("correo").setValue(correo)
+                            myRef.child(user?.uid.toString()).child("nombreUsuario").setValue(usuario)
+                            myRef.child(user?.uid.toString()).child("telefono").setValue(telefono)
+                            myRef.child(user?.uid.toString()).child("estado").setValue(estado)
+                            myRef.child(user?.uid.toString()).child("ciudad").setValue(ciudad)
+                            myRef.child(user?.uid.toString()).child("nombre").setValue(nombre)
                             startActivity(intent)
                             Toast.makeText(baseContext, "Bienvenido $usuario",Toast.LENGTH_SHORT).show()
                         } else {
                             Log.w("crear cuenta", "createUserWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "Authentication failed.",
+                            Toast.makeText(baseContext, "Fallo de autenticacion.",
                                 Toast.LENGTH_SHORT).show()
-
                         }
                     }
             }
