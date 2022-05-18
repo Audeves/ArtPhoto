@@ -174,12 +174,12 @@ class GalleryFragment : Fragment() {
         val imageref = storageRef.child(nombreImg)
         val ONE_MEGABYTE: Long = 1024 * 1024
         imageref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            Toast.makeText(context,"Se consiguio la imagen",Toast.LENGTH_SHORT).show()
-          //  var bitmap:Bitmap =(it as BitmapDrawable).bitmap
+         //   Toast.makeText(context,"Se consiguio la imagen",Toast.LENGTH_SHORT).show()
+            var bitmap:Bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
           //  var blop:ByteArrayOutputStream = ByteArrayOutputStream()
         //    bitmap.compress(Bitmap.CompressFormat.JPEG,100,blop)
       //      var data = blop.toByteArray()
-         //  ejemplo_icono.setImageBitmap(bitmap)
+           ejemplo_icono.setImageBitmap(bitmap)
         }.addOnFailureListener {
             Toast.makeText(context,"No se consiguio la imagen",Toast.LENGTH_SHORT).show()
             // Handle any errors
