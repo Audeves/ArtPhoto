@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                                 Toast.makeText(this, "Credenciales aceptadas.", Toast.LENGTH_SHORT)
                                     .show()
                                 val intent: Intent = Intent(this, HomeActivity::class.java)
+                                intent.putExtra("correo",correo)
                                 startActivity(intent)
                             } else {
                                 Toast.makeText(
