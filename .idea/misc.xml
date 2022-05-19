@@ -19,6 +19,7 @@
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_primer_inicio.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_publicacion.xml" value="0.3625" />
+        <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_recuperar_contra.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/app_bar_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/content_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/fragment_gallery.xml" value="0.36666666666666664" />
@@ -30,17 +31,15 @@
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/layout/publicacion_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Carlos/Documents/GitHub/ArtPhoto/app/src/main/res/menu/home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1945" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_crear_cuenta.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_crear_cuenta2.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_home.xml" value="0.13069908814589665" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_inicio_sesion.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_primer_inicio.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_publicacion.xml" value="0.1897644927536232" />
-        <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/activity_recuperar_contra.xml" value="0.24230072463768115" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/app_bar_home.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/content_home.xml" value="0.1897644927536232" />
-        <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/fragment_gallery.xml" value="0.25" />
+        <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/fragment_gallery.xml" value="0.13069908814589665" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/fragment_home.xml" value="0.13069908814589665" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/fragment_slideshow.xml" value="0.1897644927536232" />
         <entry key="..\:/Users/Desktop/AndroidStudioProjects/ArtPhoto/app/src/main/res/layout/menu_perfil.xml" value="0.1897644927536232" />
@@ -83,8 +82,8 @@
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_inicio_sesion.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_primer_inicio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_publicacion.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/activity_recuperar_contra.xml" value="0.15260416666666668" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/chat.xml" value="0.22" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/content_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/fragment_gallery.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/darkl/Documents/GitHub/ArtPhoto/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
