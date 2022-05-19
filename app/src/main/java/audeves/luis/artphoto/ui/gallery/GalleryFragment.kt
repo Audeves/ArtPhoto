@@ -78,7 +78,7 @@ class GalleryFragment : Fragment() {
             textView.text = it
         }
         val usuario = auth.currentUser
-
+        val img_subirFoto: ImageView = root.findViewById(R.id.imageView4)
         if (usuario != null){
             nombreImg = "perfil/"+usuario?.uid.toString()+".jpg"
             myRef.child(usuario.uid)
@@ -95,8 +95,18 @@ class GalleryFragment : Fragment() {
 
                descargarImagen()
             }.addOnFailureListener{
-                Toast.makeText(context,"rip",Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context,"rip",Toast.LENGTH_SHORT).show()
                 //Log.e("firebase", "Error getting data", it)
+            }
+
+            myRef.child(usuario.uid).child("esFotografo").get().addOnSuccessListener{
+                    if (it.getValue() == true){
+                        img_subirFoto.visibility = View.VISIBLE
+                    }else{
+                        img_subirFoto.visibility = View.GONE
+                    }
+            }.addOnFailureListener{
+
             }
           //  myRef.addValueEventListener(usuarioListener)
         }
