@@ -6,17 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".ui.slideshow.SlideshowFragment">
 
+    <ImageView
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/unirse_como_fotografo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_unirse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="UNIRSE COMO FÓTOGRAFO"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tv_ser_fotografo"/>
+
+    <TextView
+        android:id="@+id/tv_ser_fotografo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Se un fótografo"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginHorizontal="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/fondo"
+        app:layout_constraintStart_toStartOf="@+id/fondo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/text_slideshow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="72dp"
+        android:text="@string/beneficios_fotografo"
+        android:textColor="@color/white"
+        android:layout_marginHorizontal="50dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_ser_fotografo" />
+
+    <Button
+        android:id="@+id/botonUnirse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:backgroundTint="#353030"
+        android:text="Unirse"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/fondo"
+        app:layout_constraintTop_toBottomOf="@+id/text_slideshow" />
+
+    <TextView
+        android:id="@+id/tv_ser_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quiero ser usuario"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/botonUnirse"
+        app:layout_constraintVertical_bias="0.21" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,4 +16,9 @@
     <string name="menu_chats">Chats</string>
     <string name="menu_publicaciones">Publicaciones</string>
     <string name="menu_buscar">Buscar</string>
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="dialog_message">Estás segur@?</string>
+    <string name="dialog_title">AVISO</string>
+    <string name="beneficios_fotografo">CONTENIDO:\n• Tener perfil de fótografo.\n• Seguir a tus fotógrafos favoritos.\n• Dar me gusta a las publicaciones.\n• Subir fotos por tipo de composición.\n• Chat para contactar al usuario.\n• Unirse a una suscripción premium para fotógrafos.</string>
 </resources>

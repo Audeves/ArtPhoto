@@ -78,6 +78,19 @@ class GalleryFragment : Fragment() {
             textView.text = it
         }
         val usuario = auth.currentUser
+        val img_subirFoto: ImageView = root.findViewById(R.id.imageView4)
+        img_subirFoto.setOnClickListener{
+            if(context?.let { it1 ->
+                    ContextCompat.checkSelfPermission(
+                        it1,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                } == PackageManager.PERMISSION_GRANTED){
+                //Toast.makeText(context, "ya tiene el permiso", Toast.LENGTH_SHORT).show()
+                seleccionar_Imagen()
+            }else{
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERM_IMG)
+            }
+        }
 
         if (usuario != null){
             nombreImg = "perfil/"+usuario?.uid.toString()+".jpg"
@@ -95,8 +108,18 @@ class GalleryFragment : Fragment() {
 
                descargarImagen()
             }.addOnFailureListener{
-                Toast.makeText(context,"rip",Toast.LENGTH_SHORT).show()
+               // Toast.makeText(context,"rip",Toast.LENGTH_SHORT).show()
                 //Log.e("firebase", "Error getting data", it)
+            }
+
+            myRef.child(usuario.uid).child("esFotografo").get().addOnSuccessListener{
+                    if (it.getValue() == true){
+                        img_subirFoto.visibility = View.VISIBLE
+                    }else{
+                        img_subirFoto.visibility = View.GONE
+                    }
+            }.addOnFailureListener{
+
             }
           //  myRef.addValueEventListener(usuarioListener)
         }
