@@ -33,8 +33,11 @@ class HomeFragment : Fragment() {
     var imagenesP: ArrayList<Bitmap> = ArrayList()
     var publicaciones: ArrayList<Publicacion> = ArrayList()
     var publicadoresID: ArrayList<String> = ArrayList()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
+
+    lateinit var listView: ListView
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -48,16 +51,21 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-     //   val textView: TextView = binding.textHome
-    //    homeViewModel.text.observe(viewLifecycleOwner) {
-    //        textView.text = it
-     //   }
+        //   val textView: TextView = binding.textHome
+        //    homeViewModel.text.observe(viewLifecycleOwner) {
+        //        textView.text = it
+        //   }
         descargarPublicaciones()
-     //  descargarImgPerfil()
-        llenarPublicaciones()
+        //  descargarImgPerfil()
+
+
+        //Thread.sleep(10000)
+        //Toast.makeText(context, "aqui", Toast.LENGTH_SHORT).show()
+        var publicaciones: ArrayList<Publicacion> = ArrayList()
         var adaptador = AdaptadorPublicacion(root.context,publicaciones)
-        var listView: ListView = binding.listviewPubli
+        listView = binding.listviewPubli
         listView.adapter = adaptador
+
         return root
     }
 
@@ -66,31 +74,32 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onPause() {
+        super.onPause()
+    }
+
     fun llenarPublicaciones(){
         var contador: Int = 0
+       // Toast.makeText(context, "cambio", Toast.LENGTH_SHORT).show()
         //    Log.i("publicadoresID size:",publicadoresID.size.toString())
-      //      while (contador <= publicadoresID.size && contador <=imagenesP.size && contador <= imagenes.size){
+        //      while (contador <= publicadoresID.size && contador <=imagenesP.size && contador <= imagenes.size){
         //        myRef.child(publicadoresID[contador]).child("nombreUsuario").get().addOnSuccessListener {
+
         imagenes.forEach {
-            val publi1 = Publicacion(contador,"publicador", imagenes[contador],R.drawable.annete_dos)
+            val publi1 = Publicacion(contador,"publicador", it,R.drawable.annete_dos)
+           // Toast.makeText(context,publi1.fotoPublicacion.toString(), Toast.LENGTH_SHORT).show()
             publicaciones.add(publi1)
         }
 
-                 //   val publi1 = Publicacion(contador,it.getValue().toString(), imagenes[contador],imagenes[contador])
-
-          //         contador++
-              //  }.addOnFailureListener {
-              //      contador++
-             //       Log.e("paso algo malo","chales",it.cause)
-                //    Toast.makeText(context,"Huvo un error al desplegar publicaciones",Toast.LENGTH_SHORT).show()
-              // }
-         //   }
+        var adaptador = AdaptadorPublicacion(requireContext(),publicaciones)
+        listView = binding.listviewPubli
+        listView.adapter = adaptador
 
     }
 
     fun descargarPublicaciones(){
-
-            val imageref = storageRef.child("publicaciones")
+        var contador: Int = 0
+        val imageref = storageRef.child("publicaciones")
         val ONE_MEGABYTE: Long = 1024 * 1024
         imageref.listAll().addOnSuccessListener { lResult ->
             var publicaciones =lResult.items
@@ -100,18 +109,22 @@ class HomeFragment : Fragment() {
                 var idPublicador = nombreImg.substringBefore("_","nan")
                 publicadoresID.add(idPublicador)
                 Log.i("contadoresId se agrega",publicadoresID.size.toString())
+                Toast.makeText(context, nombreImg, Toast.LENGTH_SHORT).show()
                 sRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                     var bitmap: Bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
                     imagenes.add(bitmap)
+                  //  Toast.makeText(context, "se agrego una", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     Log.e("Fallo en convertir","rip",it)
                 }
 
             }
-        //    descargarImgPerfil()
         }.addOnFailureListener {
             Log.e("Fallo en aca","ripeo",it)
+        }.addOnCompleteListener{
+            llenarPublicaciones()
         }
+
     }
     fun descargarImgPerfil(){
         val profileRef = storageRef
