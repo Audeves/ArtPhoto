@@ -53,8 +53,8 @@ class HomeFragment : Fragment() {
     //        textView.text = it
      //   }
         descargarPublicaciones()
-        descargarImgPerfil()
-       // llenarPublicaciones()
+     //  descargarImgPerfil()
+        llenarPublicaciones()
         var adaptador = AdaptadorPublicacion(root.context,publicaciones)
         var listView: ListView = binding.listviewPubli
         listView.adapter = adaptador
@@ -68,14 +68,23 @@ class HomeFragment : Fragment() {
 
     fun llenarPublicaciones(){
         var contador: Int = 0
+        //    Log.i("publicadoresID size:",publicadoresID.size.toString())
+      //      while (contador <= publicadoresID.size && contador <=imagenesP.size && contador <= imagenes.size){
+        //        myRef.child(publicadoresID[contador]).child("nombreUsuario").get().addOnSuccessListener {
+        imagenes.forEach {
+            val publi1 = Publicacion(contador,"publicador", imagenes[contador],R.drawable.annete_dos)
+            publicaciones.add(publi1)
+        }
 
-    //        while (contador <= publicadoresID.size){
-          //      myRef.child(publicadoresID[contador]).child("nombreUsuario").get().addOnSuccessListener {
-        //            val publi1 = Publicacion(contador,it.getValue().toString(), imagenes[contador],imagenesP[contador])
-      //              publicaciones.add(publi1)
-       //             contador++
-        //        }
-        //    }
+                 //   val publi1 = Publicacion(contador,it.getValue().toString(), imagenes[contador],imagenes[contador])
+
+          //         contador++
+              //  }.addOnFailureListener {
+              //      contador++
+             //       Log.e("paso algo malo","chales",it.cause)
+                //    Toast.makeText(context,"Huvo un error al desplegar publicaciones",Toast.LENGTH_SHORT).show()
+              // }
+         //   }
 
     }
 
@@ -90,6 +99,7 @@ class HomeFragment : Fragment() {
                 var nombreImg =link.substringAfter("s/","no se encontro")
                 var idPublicador = nombreImg.substringBefore("_","nan")
                 publicadoresID.add(idPublicador)
+                Log.i("contadoresId se agrega",publicadoresID.size.toString())
                 sRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                     var bitmap: Bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
                     imagenes.add(bitmap)
@@ -98,6 +108,7 @@ class HomeFragment : Fragment() {
                 }
 
             }
+        //    descargarImgPerfil()
         }.addOnFailureListener {
             Log.e("Fallo en aca","ripeo",it)
         }
@@ -114,10 +125,12 @@ class HomeFragment : Fragment() {
             imagenIndividual.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                 var bitmapPerfil: Bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
                 imagenesP.add(bitmapPerfil)
+
             }.addOnFailureListener {
                 Log.i("explote","explote parte 2")
             }
         }
+        llenarPublicaciones()
         if (imagenesP.isEmpty()){
             Log.i("ta vacio","no hay nada")
         } else{
