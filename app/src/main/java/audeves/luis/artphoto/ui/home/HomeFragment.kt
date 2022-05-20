@@ -80,14 +80,8 @@ class HomeFragment : Fragment() {
 
     fun llenarPublicaciones(){
         var contador: Int = 0
-       // Toast.makeText(context, "cambio", Toast.LENGTH_SHORT).show()
-        //    Log.i("publicadoresID size:",publicadoresID.size.toString())
-        //      while (contador <= publicadoresID.size && contador <=imagenesP.size && contador <= imagenes.size){
-        //        myRef.child(publicadoresID[contador]).child("nombreUsuario").get().addOnSuccessListener {
-
         imagenes.forEach {
             val publi1 = Publicacion(contador,"publicador", it,R.drawable.annete_dos)
-           // Toast.makeText(context,publi1.fotoPublicacion.toString(), Toast.LENGTH_SHORT).show()
             publicaciones.add(publi1)
         }
 
@@ -109,7 +103,7 @@ class HomeFragment : Fragment() {
                 var idPublicador = nombreImg.substringBefore("_","nan")
                 publicadoresID.add(idPublicador)
                 Log.i("contadoresId se agrega",publicadoresID.size.toString())
-                Toast.makeText(context, nombreImg, Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(context, nombreImg, Toast.LENGTH_SHORT).show()
                 sRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                     var bitmap: Bitmap = BitmapFactory.decodeByteArray(it,0,it.size)
                     imagenes.add(bitmap)
