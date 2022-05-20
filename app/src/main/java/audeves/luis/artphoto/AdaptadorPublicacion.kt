@@ -43,7 +43,7 @@ class AdaptadorPublicacion: BaseAdapter {
 
         tv_publicador.setText(publi.nombrePublicador)
         iv_imgPerfil.setImageResource(publi.iconoPerfil)
-        iv_img.setImageResource(publi.fotoPublicacion)
+        iv_img.setImageBitmap(publi.fotoPublicacion)
        // Toast.makeText(context,"ayuda",Toast.LENGTH_SHORT).show()
         vista.setOnClickListener{
             val intent: Intent = Intent(context,ActivityContact::class.java)
